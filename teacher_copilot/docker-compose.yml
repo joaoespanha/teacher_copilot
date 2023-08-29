@@ -1,0 +1,31 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    networks:
+      - backend
+    depends_on:
+      - db
+    container_name: teacher_copilot_web
+  db:
+    image: mysql
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: mysql_copilot_db
+      MYSQL_PASSWORD: 1234
+    networks:
+      - backend
+
+networks:
+  backend:
+
+
+volumes:
+  db_data:
