@@ -1,0 +1,12 @@
+{% extends 'core/base.html' %} {% block title %} Welcome {% endblock %}
+ {% block content %}
+
+<div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+  <h2 class="mb-12 text-2xl text-center">DAASHBOARD</h2>
+  {% if not students %}
+    <h2>Voce ainda nao tem nenhum estudante cadastrado...</h2>
+  
+  
+  {% endif %}
+  <a href="{% url 'authorization:logout' %}">logout</a>
+{% endblock %}

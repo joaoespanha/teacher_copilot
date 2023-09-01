@@ -14,7 +14,7 @@ class Student(models.Model):
         Guardian,
         related_name="students",
     )
-    teacher = models.ManyToManyField(User)
+    teacher = models.ManyToManyField(User, related_name="students")
     email = models.EmailField(max_length=254)
     phone_number = models.CharField(max_length=15)
     favorite_subject = models.CharField(max_length=50)

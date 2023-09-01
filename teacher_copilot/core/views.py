@@ -1,16 +1,11 @@
-from django.shortcuts import render
-from django.views import View
-from .forms import LoginForm
+from django.shortcuts import render, redirect
+from django.views.generic import TemplateView
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
 
-class IndexTemplateView(View):
-    template_name = "core/index.html"
-
-    def get(self, request, *args, **kwargs):
-        context = {}
-        if not request.user.is_authenticated:
-            self.template_name = "core/login.html"
-            context["forms"] = LoginForm(request.POST or None)
-        return render(request, self.template_name, context)
+@method_decorator(login_required, name="dispatch")
+class DashBoardView(TemplateView):
+    template_name = "core/dashboard.html"
