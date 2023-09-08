@@ -1,0 +1,38 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="grid grid-cols-4 gap-6">
+    <div class="col-span-2 ">
+        <img src="#" alt="{{guardian}} photo" class="rounded-xl ">
+
+    </div>
+
+    <div class="bg-gray-100 p-6 col-span-2 rounded-xl">
+        <h1 class="mb-6 text-3xl">{{guardian}}</h1>
+        <p class="text-gray-500"><strong>Email: </strong>{{guardian.email}}</p>
+
+        <p class="text-gray-700"><strong class="text-gray-700">Cellular: </strong>{{guardian.phone_number}}</p>
+
+
+    {% if request.user == guardian.created_by %}
+        <div class='mt-6 p-6 bg-white rounded-xl'>
+            <h3 class='font-bold text-2xl'>This is guardian is yours!</h3>
+
+            <a class='inline-block mt-6 px-6 py-3 text-lg font-semibold bg-red-500 text-white rounded-xl' href="#">Excluir</a>
+            <a class='inline-block mt-6 px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700' href='#'>Editar</a>
+
+        </div>
+
+    {% else %}
+        <a href="#"
+            class="inline-block mt-6 py-6 px-6 text-lg bg-teal-500 text-white rounded-xl font-semibold hover:bg-teal-700 ">Contact
+            Seller</a>
+    </div>
+
+    {% endif %}
+</div>
+
+
+
+
+{% endblock %}

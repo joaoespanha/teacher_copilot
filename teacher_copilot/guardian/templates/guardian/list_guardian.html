@@ -9,7 +9,7 @@
     {% for guardian in guardians_list %}
 
     <div>
-      <a href="#">
+      <a href="{% url 'guardian:details' guardian.id %}">
         <div>
           <img src="#" class="rounded-t-xl" />
         </div>

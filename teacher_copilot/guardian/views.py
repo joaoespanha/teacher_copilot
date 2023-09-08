@@ -47,10 +47,26 @@ class ListGuardiansView(View):
         guardians_list = Guardian.objects.all()
         self.context["guardians_list"] = guardians_list
         if guardians_list:
+            print(guardians_list[0])
             return render(request, self.template_name, self.context)
         else:
             self.context[
                 "message"
             ] = "Você ainda não tem nenhum  responsável cadastrado..."
+
+            return render(request, self.template_name, self.context)
+
+
+class DetailGuardiansView(View):
+    template_name = "guardian/details_guardian.html"
+    context = {"guardian": None}
+
+    def get(self, request, guardian_id):
+        guardian_data = Guardian.objects.get(id=guardian_id)
+        self.context["guardian"] = guardian_data
+        if guardian_data:
+            return render(request, self.template_name, self.context)
+        else:
+            self.context["message"] = "Resposável não encontrado..."
 
             return render(request, self.template_name, self.context)
