@@ -8,8 +8,22 @@
         {{form.non_field_errors}}
         <div class='mb-6'>
             <label class='inline-block mb-2' for="username">
-                Username<br>
-                {{form.username}}
+                Nome<br>
+                {{form.first_name}}
+            </label>
+        </div>
+
+        <div class='mb-6'>
+            <label class='inline-block mb-2' for="username">
+                Sobrenome<br>
+                {{form.last_name}}
+            </label>
+        </div>
+
+        <div class='mb-6'>
+            <label class='inline-block mb-2' for="username">
+                Celular<br>
+                {{form.phone_number}}
             </label>
         </div>
 
@@ -22,18 +36,21 @@
 
         <div class='mb-6'>
             <label class='inline-block mb-2' for="username">
-                Password<br>
-                {{form.password1}}
+                Foto<br>
+                {{form.photo}}
             </label>
-        </div>
 
+        </div>
         <div class='mb-6'>
             <label class='inline-block mb-2' for="username">
-                Repeat Password<br>
-                {{form.password2}}
+                Notas<br>
+                {{form.notes}}
             </label>
-        </div>
 
+        </div>
+ 
+        
+ 
         {%if form.errors or form.non_field_errors%}
 
         <div class='mb-6'>

@@ -2,7 +2,8 @@
  {% block content %}
 
 <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
-  <h2 class="mb-12 text-2xl text-center">DAASHBOARD</h2>
+  <h2 class="mb-12 text-2xl text-center">DASHBOARD</h2>
+  <a href="{% url 'guardian:list' %}">Responsaveis</a>
   {% if not students %}
     <h2>Voce ainda nao tem nenhum estudante cadastrado...</h2>
   

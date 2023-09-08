@@ -2,9 +2,15 @@ from django.shortcuts import render, redirect
 from .forms import LoginForm, SingUpForm
 from django.views import View
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 
 # Create your views here.
+@method_decorator(
+    login_required,
+    name="dispatch",
+)
 class AuthenticationTemplateView(View):
     template_name = "authorization/login.html"
     form_class = LoginForm
@@ -27,8 +33,9 @@ class AuthenticationTemplateView(View):
             if user is not None:
                 login(request, user)
                 return redirect("core:dashboard")
-        else:
-            return render(request, self.template_name, self.context)
+            else:
+                return render(request, self.template_name, self.context)
+        return render(request, self.template_name, self.context)
 
 
 class SignUpView(View):
