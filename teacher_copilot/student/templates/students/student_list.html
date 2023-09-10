@@ -3,29 +3,31 @@
 {% block content %}
 
 <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
-  <h2 class="mb-12 text-2xl text-center">Responsáveis</h2>
+  <h2 class="mb-12 text-2xl text-center">Alunos</h2>
 
   <div class="grid grid-cols-3 gap-3">
-    {% for guardian in guardians_list %}
+    {% for student in students_list %}
 
     <div>
-      <a href="{% url 'guardian:details' guardian.id %}">
+      <a href="{% url 'student:details' student.id %}">
         <div>
           <img src="#" class="rounded-t-xl" />
         </div>
 
         <div class="p-6 bg-white rounded-b-xl">
-          <h2 class="font-semibold text-x">{{guardian}}</h2>
-          <h3>{{guardian.email}}</h3>
-          <p>{{guardian.notes}}</p>
+          <h2 class="font-semibold text-x">{{student}}</h2>
+          <h3>{{student.email}}</h3>
+          <p>{{student.notes}}</p>
         </div>
       </a>
     </div>
 
     {% endfor %}
-  </div>
- 
 
+    
+  
+  <div>ola tudo bem?</div>
+  </div>
 </div>
 
 

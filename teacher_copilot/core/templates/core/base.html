@@ -21,6 +21,8 @@
             <a href="{% url 'authorization:signup' %}" class="px-6 py-3 font-semibold bg-violet-500 text-white rounded-xl hover:bg-violet-700">Criar Conta</a>
             {% else %}
             <a href="{% url 'guardian:create'  %}" class="px-6 py-3 font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Criar Responsável</a>
+            <a href="{% url 'student:create'  %}" class="px-6 py-3 font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Criar Estudante</a>
+
             {% endif %}
         </div>
     </nav>

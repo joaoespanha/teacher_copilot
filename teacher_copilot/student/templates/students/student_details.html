@@ -3,18 +3,18 @@
 {% block content %}
 <div class="grid grid-cols-4 gap-6">
     <div class="col-span-2 ">
-        <img src="#" alt="{{guardian}} photo" class="rounded-xl ">
+        <img src="#" alt="{{student}} photo" class="rounded-xl ">
 
     </div>
 
     <div class="bg-gray-100 p-6 col-span-2 rounded-xl">
-        <h1 class="mb-6 text-3xl">{{guardian}}</h1>
-        <p class="text-gray-500"><strong>Email: </strong>{{guardian.email}}</p>
+        <h1 class="mb-6 text-3xl">{{student}}</h1>
+        <p class="text-gray-500"><strong>Email: </strong>{{student.email}}</p>
 
-        <p class="text-gray-700"><strong class="text-gray-700">Cellular: </strong>{{guardian.phone_number}}</p>
+        <p class="text-gray-700"><strong class="text-gray-700">Celular: </strong>{{student.phone_number}}</p>
 
 
-    {% if request.user == guardian.created_by %}
+    {% if request.user == student.created_by %}
         <div class='mt-6 p-6 bg-white rounded-xl'>
 
             <a class='inline-block mt-6 px-6 py-3 text-lg font-semibold bg-red-500 text-white rounded-xl' href="#">Excluir</a>

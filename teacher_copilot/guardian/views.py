@@ -1,7 +1,5 @@
 from django.shortcuts import render
-from django.shortcuts import render, redirect
 from django.views import View
-from django.contrib.auth import logout
 from .forms import GuardianForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -27,11 +25,13 @@ class CreateGuardianView(View):
         self.form_class = GuardianForm(request.POST)
         self.context["form"] = self.form_class
 
-        if self.form_class.is_valid:
-            self.form_class.save()
-
+        if self.form_class.is_valid():
+            new_guardian = self.form_class.save(commit=False)
+            new_guardian.created_by = request.user
+            new_guardian.save()
             return render(request, self.template_name, self.context)
         else:
+            self.context["messsage"] = "ERROR"
             return render(request, self.template_name, self.context)
 
 
@@ -47,7 +47,6 @@ class ListGuardiansView(View):
         guardians_list = Guardian.objects.all()
         self.context["guardians_list"] = guardians_list
         if guardians_list:
-            print(guardians_list[0])
             return render(request, self.template_name, self.context)
         else:
             self.context[
@@ -59,13 +58,14 @@ class ListGuardiansView(View):
 
 class DetailGuardiansView(View):
     template_name = "guardian/details_guardian.html"
-    context = {"guardian": None}
+    context = {}
 
     def get(self, request, guardian_id):
         guardian_data = Guardian.objects.get(id=guardian_id)
-        self.context["guardian"] = guardian_data
         if guardian_data:
-            return render(request, self.template_name, self.context)
+            if guardian_data.created_by == request.user:
+                self.context["guardian"] = guardian_data
+                return render(request, self.template_name, self.context)
         else:
             self.context["message"] = "Resposável não encontrado..."
 

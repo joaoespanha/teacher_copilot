@@ -7,10 +7,6 @@ from django.utils.decorators import method_decorator
 
 
 # Create your views here.
-@method_decorator(
-    login_required,
-    name="dispatch",
-)
 class AuthenticationTemplateView(View):
     template_name = "authorization/login.html"
     form_class = LoginForm
@@ -32,7 +28,7 @@ class AuthenticationTemplateView(View):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect("core:dashboard")
+                return redirect("student:list")
             else:
                 return render(request, self.template_name, self.context)
         return render(request, self.template_name, self.context)
@@ -53,7 +49,7 @@ class SignUpView(View):
             self.form_class.save()
             return redirect("authorization:login")
 
-        return render(request, "authorization/signup.html", {"form": self.form_class})
+        return render(request, self.template_name, {"form": self.form_class})
 
 
 class LogoutView(View):
