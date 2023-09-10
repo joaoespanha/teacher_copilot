@@ -24,11 +24,12 @@ class CreateStudentView(View):
     def post(self, request):
         self.form_class = StudentForm(request.POST)
         self.context["form"] = self.form_class
+        teacher = request.user
 
         if self.form_class.is_valid():
             new_student = self.form_class.save(commit=False)
-            new_student.teacher = request.user
             new_student.save()
+            new_student.teacher.set([teacher])
             return render(request, self.template_name, self.context)
         else:
             self.context["messsage"] = "ERROR"
@@ -56,6 +57,10 @@ class ListStudentView(View):
             return render(request, self.template_name, self.context)
 
 
+@method_decorator(
+    login_required,
+    name="dispatch",
+)
 class DetailStudentView(View):
     template_name = "students/student_details.html"
     context = {}
