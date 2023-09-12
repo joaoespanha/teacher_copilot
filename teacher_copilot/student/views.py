@@ -4,6 +4,7 @@ from .forms import StudentForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from .models import Student
+from django.core.cache import cache
 
 
 # Create your views here.
@@ -45,7 +46,14 @@ class ListStudentView(View):
     context = {}
 
     def get(self, request):
-        students_list = Student.objects.filter(teacher=request.user)
+        teacher = request.user
+
+        self.context["teacher"] = teacher
+
+        students_list = Student.objects.filter(teacher=teacher)
+
+        self.context = {}
+
         if students_list:
             self.context["students_list"] = students_list
             return render(request, self.template_name, self.context)

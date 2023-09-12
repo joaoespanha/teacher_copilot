@@ -7,7 +7,7 @@
 
   <div class="grid grid-cols-3 gap-3">
     {% for student in students_list %}
-
+   
     <div>
       <a href="{% url 'student:details' student.id %}">
         <div>
@@ -21,7 +21,7 @@
         </div>
       </a>
     </div>
-
+  
     {% endfor %}
 
     
