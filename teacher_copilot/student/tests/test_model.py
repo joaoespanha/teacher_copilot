@@ -13,6 +13,11 @@ valid_student_mock = {
     "phone_number": "219983737",
     "notes": "forte demais",
     "birthday": date(2000, 4, 15),
+    "instagram": "@olaaola",
+    "football_team": "flamengo",
+    "grade": "sexto ano",
+    "school": "pentagono",
+    "favorite_subject": "Matematica",
 }
 
 
@@ -41,6 +46,7 @@ class StudentModelTestCase(TestCase):
         self.valid_student_01 = Student.objects.create(**valid_student_mock)
 
         self.valid_student_01.guardians.add(self.valid_guardian_01)
+        self.valid_student_01.teacher.add(self.user)
 
     def tests_if_given_a_valid_student_it_creates_a_correct_obj(self):
         valid_student = Student.objects.get(email=valid_student_mock["email"])
@@ -51,5 +57,18 @@ class StudentModelTestCase(TestCase):
         self.assertEqual(valid_student.phone_number, valid_student_mock["phone_number"])
         self.assertEqual(valid_student.notes, valid_student_mock["notes"])
         self.assertEqual(valid_student.birthday, valid_student_mock["birthday"])
+        self.assertEqual(valid_student.instagram, valid_student_mock["instagram"])
+        self.assertEqual(
+            valid_student.football_team, valid_student_mock["football_team"]
+        )
+        self.assertEqual(valid_student.grade, valid_student_mock["grade"])
+        self.assertEqual(valid_student.school, valid_student_mock["school"])
+        self.assertEqual(
+            valid_student.favorite_subject, valid_student_mock["favorite_subject"]
+        )
+
+        self.assertIn(self.user, valid_student.teacher.all())
 
         self.assertIn(self.valid_guardian_01, valid_student.guardians.all())
+
+        self.assertTrue(valid_student.is_active)
