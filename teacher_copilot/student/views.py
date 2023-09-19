@@ -86,6 +86,10 @@ class DetailStudentView(View):
             return render(request, self.template_name, self.context)
 
 
+@method_decorator(
+    login_required,
+    name="dispatch",
+)
 class DeleteStudentView(View):
     template_name = "students/student_details.html"
     context = {}
@@ -101,6 +105,10 @@ class DeleteStudentView(View):
             return render(request, self.template_name, self.context)
 
 
+@method_decorator(
+    login_required,
+    name="dispatch",
+)
 class EditStudentView(View):
     template_name = "students/student_create.html"
     context = {}
