@@ -47,3 +47,15 @@ class JWTMiddlewareTestCase(TestCase):
         response = middleware(request)
 
         self.assertEqual(response.url, "/auth/login")
+
+    def test_inexistant_token(self):
+        request = self.factory.get("student:list")
+
+        middleware = JWTMiddleware(get_response=lambda r: r)
+
+        middleware_session = SessionMiddleware(get_response=lambda r: r)
+        request = middleware_session(request)
+
+        response = middleware(request)
+
+        self.assertEqual(response.url, "/auth/login")
