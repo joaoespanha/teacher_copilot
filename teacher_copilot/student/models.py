@@ -29,3 +29,14 @@ class Student(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+
+
+class Avaliation(models.Model):
+    grade = models.FloatField()
+    student = models.ForeignKey(
+        Student, on_delete=models.CASCADE, related_name="avaliations"
+    )
+    subject = models.CharField(max_length=50)
+    date = models.DateField()
+    revised = models.BooleanField(default=False)
+    notes = models.TextField(max_length=500)
