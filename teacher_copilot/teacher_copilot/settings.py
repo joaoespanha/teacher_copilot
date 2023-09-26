@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "authorization",
 ]
 
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -56,6 +57,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "teacher_copilot.middlewares.JWTMiddleware.JWTMiddleware",
 ]
 
 ROOT_URLCONF = "teacher_copilot.urls"

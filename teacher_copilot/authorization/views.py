@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from .forms import LoginForm, SingUpForm
 from django.views import View
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
+from django.conf import settings
+import jwt
 
 
 # Create your views here.
@@ -25,9 +26,20 @@ class AuthenticationTemplateView(View):
             password = request.POST["password"]
 
             user = authenticate(username=username, password=password)
+
             if user is not None:
+                token_payload = {"user_id": user.id}
+
+                token = jwt.encode(
+                    token_payload, settings.SECRET_KEY, algorithm="HS256"
+                )
+
                 login(request, user)
-                return redirect("student:list")
+                response = redirect("student:list")
+                response.set_cookie("token", token)
+
+                return response
+
             else:
                 return render(request, self.template_name, self.context)
         return render(request, self.template_name, self.context)
